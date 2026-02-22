@@ -5,7 +5,7 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const handleOutsideClick = (e) => {
-    if (e.target.className === "modal-overlay") {
+    if (e.target.className === "modal") {
       setOpen(false);
     }
   };
