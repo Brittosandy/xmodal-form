@@ -55,7 +55,7 @@ function App() {
       )}
 
       {open && (
-        <div className="modal-overlay" onClick={handleOutsideClick}>
+        <div className="modal" onClick={handleOutsideClick}>
           <div className="modal-content">
             <h2>Fill Details</h2>
 
