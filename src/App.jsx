@@ -92,6 +92,12 @@ import "./App.css";
 function App() {
   const [open, setOpen] = useState(false);
 
+  const handleOutsideClick = (e) => {
+    if (e.target.className.includes("modal")) {
+      setOpen(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -100,9 +106,7 @@ function App() {
     const phone = document.getElementById("phone").value.trim();
     const dob = document.getElementById("dob").value;
 
-    if (!username || !email || !phone || !dob) {
-      return;
-    }
+    if (!username || !email || !phone || !dob) return;
 
     if (!email.includes("@")) {
       alert("Invalid email. Please check your email address.");
@@ -122,29 +126,28 @@ function App() {
       return;
     }
 
-    // close modal when form is valid
     setOpen(false);
   };
 
   return (
-    <div className={`modal ${open ? "modal-open" : ""}`}>
-      
-      {/* Initial Screen */}
+    <div
+      className={`modal ${open ? "modal-open" : ""}`}
+      onClick={handleOutsideClick}
+    >
       {!open && (
         <div className="main-container">
           <h1>User Details Modal</h1>
-          <button
-            className="open-form-btn"
-            onClick={() => setOpen(true)}
-          >
+          <button className="open-form-btn" onClick={() => setOpen(true)}>
             Open Form
           </button>
         </div>
       )}
 
-      {/* Modal Form */}
       {open && (
-        <div className="modal-content">
+        <div
+          className="modal-content"
+          onClick={(e) => e.stopPropagation()}
+        >
           <h2>Fill Details</h2>
 
           <form onSubmit={handleSubmit}>
@@ -166,7 +169,6 @@ function App() {
           </form>
         </div>
       )}
-
     </div>
   );
 }
