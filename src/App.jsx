@@ -93,7 +93,7 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const handleOutsideClick = (e) => {
-    if (e.target.className.includes("modal")) {
+    if (e.target.className === "overlay") {
       setOpen(false);
     }
   };
@@ -130,43 +130,33 @@ function App() {
   };
 
   return (
-    <div
-      className={`modal ${open ? "modal-open" : ""}`}
-      onClick={handleOutsideClick}
-    >
+    <div className="app">
       {!open && (
         <div className="main-container">
           <h1>User Details Modal</h1>
-          <button className="open-form-btn" onClick={() => setOpen(true)}>
-            Open Form
-          </button>
+          <button onClick={() => setOpen(true)}>Open Form</button>
         </div>
       )}
 
       {open && (
-        <div
-          className="modal-content"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <h2>Fill Details</h2>
+        <div className="overlay" onClick={handleOutsideClick}>
+          <div
+            className="modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2>Fill Details</h2>
 
-          <form onSubmit={handleSubmit}>
-            <label>Username:</label>
-            <input id="username" type="text" required />
+            <form onSubmit={handleSubmit}>
+              <input id="username" placeholder="Username" required />
+              <input id="email" placeholder="Email" required />
+              <input id="phone" placeholder="Phone Number" required />
+              <input id="dob" type="date" required />
 
-            <label>Email Address:</label>
-            <input id="email" type="email" required />
-
-            <label>Phone Number:</label>
-            <input id="phone" type="text" required />
-
-            <label>Date of Birth:</label>
-            <input id="dob" type="date" required />
-
-            <button className="submit-button" type="submit">
-              Submit
-            </button>
-          </form>
+              <button className="submit-button" type="submit">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </div>
