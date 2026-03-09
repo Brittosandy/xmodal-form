@@ -93,7 +93,7 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const handleOutsideClick = (e) => {
-    if (e.target.className === "overlay") {
+    if (e.target.className === "modal") {
       setOpen(false);
     }
   };
@@ -139,9 +139,9 @@ function App() {
       )}
 
       {open && (
-        <div className="overlay" onClick={handleOutsideClick}>
+        <div className="modal" onClick={handleOutsideClick}>
           <div
-            className="modal"
+            className="modal-content"
             onClick={(e) => e.stopPropagation()}
           >
             <h2>Fill Details</h2>
